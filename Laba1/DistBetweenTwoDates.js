@@ -22,22 +22,22 @@ function InputDate(str){
 }
 
 // печать расстояния между датами в соответствии с полученными количествами дней, недель и т.д.
-function printDistUnits (years, months, weeks, days){
+function printDistUnits (days, weeks = undefined, months = undefined, years = undefined){
     let result = `Результат: `;
     let formatPrint = false;
-    if ((years != -1) || formatPrint){
+    if ((years != undefined) || formatPrint){
         result += `${years} г. `;
         formatPrint = true;
     }
-    if ((months != -1) || formatPrint){
+    if ((months != undefined) || formatPrint){
         result += `${months} мес. `;
         formatPrint = true;
     }
-    if ((weeks != -1) || formatPrint){
+    if ((weeks != undefined) || formatPrint){
         result += `${weeks} нед. `;
         formatPrint = true;
     }
-    if ((days != -1) || formatPrint){
+    if ((days != undefined) || formatPrint){
         result += `${days} дн. `;
         formatPrint = true;
     }
@@ -104,16 +104,19 @@ function printDistance(countYearsIsOk, date1, date2, distDays){
     let countDays = distDays;
 
     if (countYearsIsOk){
-        printDistUnits(countYears, countMonths, countWeeks, countDays);
+        printDistUnits(countDays, countWeeks, countMonths, countYears);
     }
     else{
-        printDistUnits(-1, countYears * 12 + countMonths, countWeeks, countDays);
+        printDistUnits(countDays, countWeeks, countYears * 12 + countMonths);
     }
 }
 
 // ввод двух дат (по умолчанию - текущая дата)
 let firstDate = InputDate("Введите первую дату: ");
 let secondDate = InputDate("Введите вторую дату: ");
+
+
+
 
 
 if (firstDate.getTime() > secondDate.getTime()){
@@ -138,11 +141,11 @@ switch (distUnit) {
         break;
     }
     case "недели": {
-        printDistUnits(-1,-1, Math.trunc(distDays / 7), distDays % 7);
+        printDistUnits(distDays % 7, Math.trunc(distDays / 7));
         break;
     }
     default: {
-        printDistUnits(-1,-1, -1, distDays);
+        printDistUnits(distDays);
         break;
     }
 }
