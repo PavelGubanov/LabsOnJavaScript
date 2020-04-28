@@ -22,7 +22,7 @@ function InputDate(str){
 }
 
 // печать расстояния между датами в соответствии с полученными количествами дней, недель и т.д.
-function printDistUnits (days, weeks = undefined, months = undefined, years = undefined){
+function printDistUnits (days, weeks, months, years){
     let result = `Результат: `;
     let formatPrint = false;
     if ((years != undefined) || formatPrint){
